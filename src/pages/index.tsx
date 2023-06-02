@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -23,7 +23,8 @@ const Home = () => {
     setTokens((prevTokens) => ({ ...prevTokens, [name]: value }));
   };
 
-  const handleClick = async () => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setLoading(true);
 
     try {
@@ -63,26 +64,33 @@ const Home = () => {
       <h1 className="text-center text-6xl mt-40 font-bold tracking-widest">
         UNIZEN
       </h1>
-      <Card>
-        <div className="flex items-end w-full gap-8 justify-between">
-          <Input
-            name="tokenA"
-            label="Token A"
-            value={tokens.tokenA}
-            onChange={handleChange}
-          />
-          <Input
-            name="tokenB"
-            label="Token B"
-            value={tokens.tokenB}
-            onChange={handleChange}
-          />
-          <Button name="get" onClick={handleClick} disabled={loading}>
-            {loading ? "Loading..." : "GET INFO"}
-          </Button>
-        </div>
-        {tokenPairInfo && <Table data={tokenPairInfo} />}
-      </Card>
+      <div className="flex justify-center">
+        <Card>
+          <form
+            className="flex items-end w-full gap-8 justify-between"
+            onSubmit={handleSubmit}
+          >
+            <Input
+              name="tokenA"
+              label="Token A"
+              value={tokens.tokenA}
+              onChange={handleChange}
+              required
+            />
+            <Input
+              name="tokenB"
+              label="Token B"
+              value={tokens.tokenB}
+              onChange={handleChange}
+              required
+            />
+            <Button name="get" type="submit" disabled={loading}>
+              {loading ? "Loading..." : "GET INFO"}
+            </Button>
+          </form>
+          {tokenPairInfo && !loading && <Table data={tokenPairInfo} />}
+        </Card>
+      </div>
       <ToastContainer />
     </>
   );
