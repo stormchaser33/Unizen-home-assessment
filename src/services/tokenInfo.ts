@@ -2,7 +2,6 @@ import { ethers } from "ethers";
 import v2ABI from "@/config/UniswapV2FactoryABI.json";
 import v3ABI from "@/config/UniswapV3FactoryABI.json";
 import sushiABI from "@/config/SushiswapFactoryABI.json";
-import v2PairABI from "@/config/UniswapV2PairABI.json";
 import erc20ABI from "@/config/erc20ABI.json";
 
 type FactoryType = {
