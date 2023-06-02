@@ -33,13 +33,17 @@ const Home = () => {
           tokens.tokenB,
           dex
         );
-        const tokenAAmount =
-          parseInt(await getTokenAmount(tokens.tokenA, pairAddress)) /
-          10 ** parseInt(await getDecimals(tokens.tokenA));
+        let tokenAAmount = 0,
+          tokenBAmount = 0;
+        if (parseInt(pairAddress) !== 0) {
+          tokenAAmount =
+            parseInt(await getTokenAmount(tokens.tokenA, pairAddress)) /
+            10 ** parseInt(await getDecimals(tokens.tokenA));
 
-        const tokenBAmount =
-          parseInt(await getTokenAmount(tokens.tokenB, pairAddress)) /
-          10 ** parseInt(await getDecimals(tokens.tokenB));
+          tokenBAmount =
+            parseInt(await getTokenAmount(tokens.tokenB, pairAddress)) /
+            10 ** parseInt(await getDecimals(tokens.tokenB));
+        }
 
         return { type: dex, pairAddress, tokenAAmount, tokenBAmount };
       });
