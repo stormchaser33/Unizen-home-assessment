@@ -1,7 +1,7 @@
 import { TableDataType } from "@/types/types";
 import { HiOutlineDuplicate } from "react-icons/hi";
 import copy from "clipboard-copy";
-import React, { useRef } from "react";
+import React from "react";
 import { toast } from "react-toastify";
 
 const Table: React.FC<TableDataType> = ({ data }) => {
@@ -45,8 +45,8 @@ const Table: React.FC<TableDataType> = ({ data }) => {
                       <td className="whitespace-nowrap px-6 py-4 font-medium">
                         {item.type}
                       </td>
-                      <td className="whitespace-nowrap px-6 py-4 relative">
-                        <div className="truncate px-6">{item.pairAddress}</div>
+                      <td className="whitespace-nowrap px-6 py-4 relative justify-start flex">
+                        <div className="truncate pr-6">{item.pairAddress}</div>
                         <button
                           onClick={() => copyToClipboard(item.pairAddress)}
                           className="absolute inset-y-0 right-0 px-3 flex items-center text-gray-500 hover:text-gray-700 focus:outline-none"

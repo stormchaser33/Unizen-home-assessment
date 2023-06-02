@@ -4,11 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import Button from "@/components/atoms/Button/Button";
 import Input from "@/components/atoms/Input/Input";
-import {
-  getDecimals,
-  getTokenAmount,
-  getTokenPairAddress,
-} from "@/services/tokenInfo";
+import { getDecimals, getTokenAmount, getTokenPairAddress } from "@/services";
 import { TokenPairInfoType } from "@/types/types";
 import { Dex } from "@/types/enums";
 import Table from "@/components/molecules/Table";
@@ -58,9 +54,11 @@ const Home = () => {
     }
   };
 
-  console.log(tokenPairInfo);
   return (
     <>
+      <h1 className="text-center text-6xl mt-40 font-bold tracking-widest">
+        UNIZEN
+      </h1>
       <Card>
         <div className="flex items-end w-full gap-8 justify-between">
           <Input
