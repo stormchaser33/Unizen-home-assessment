@@ -7,7 +7,16 @@ import { TableDataType } from "@/types/types";
 const Table: React.FC<TableDataType> = ({ data }) => {
   const copyToClipboard = (pairAddress: string) => {
     copy(pairAddress);
-    toast("Pair Address is Copied");
+    toast.success("Pair Address is Copied", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   };
 
   return (

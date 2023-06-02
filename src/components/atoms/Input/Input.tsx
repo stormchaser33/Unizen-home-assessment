@@ -22,7 +22,16 @@ const Input: React.FC<InputProps> = ({
   const copyToClipboard = () => {
     if (inputRef.current) {
       copy(inputRef.current.value);
-      toast("Token Address has been copied");
+      toast.success("Token Address is copied", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     }
   };
 
