@@ -26,11 +26,11 @@ export const getTokenPairAddress = async (
   tokenB: string,
   type: string
 ): Promise<string> => {
-  const factoryAddress = factoryAddresses[type].tokenAddress;
-  console.log("factory Address", factoryAddress);
+  const { tokenAddress, ABI } = factoryAddresses[type];
+  console.log("Factory Address:", tokenAddress);
   const factoryContract = new ethers.Contract(
-    factoryAddress as string,
-    factoryAddresses[type].ABI,
+    tokenAddress as string,
+    ABI,
     provider
   );
 
@@ -43,14 +43,14 @@ export const getTokenPairAddress = async (
 };
 
 export const getTokenAmount = async (token: string, pairAddress: string) => {
-  const erc20Contract = await new ethers.Contract(token, erc20ABI, provider);
+  const erc20Contract = new ethers.Contract(token, erc20ABI, provider);
 
   const balance = await erc20Contract.balanceOf(pairAddress);
   return balance;
 };
 
-export const getDecimals = async (token: string, type: string) => {
-  const erc20Contract = await new ethers.Contract(token, erc20ABI, provider);
+export const getDecimals = async (token: string) => {
+  const erc20Contract = new ethers.Contract(token, erc20ABI, provider);
 
   const decimals = await erc20Contract.decimals();
 

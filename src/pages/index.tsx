@@ -8,7 +8,7 @@ import { getDecimals, getTokenAmount, getTokenPairAddress } from "@/services";
 import { TokenPairInfoType } from "@/types/types";
 import { Dex } from "@/types/enums";
 import Table from "@/components/molecules/Table";
-import Card from "@/components/atoms/Card/Card";
+import Card from "@/components/atoms/Card";
 
 const Home = () => {
   const [tokens, setTokens] = useState({
@@ -27,21 +27,21 @@ const Home = () => {
     setLoading(true);
 
     try {
-      const promises = Object.keys(Dex).map(async (key) => {
+      const promises = Object.values(Dex).map(async (dex) => {
         const pairAddress = await getTokenPairAddress(
           tokens.tokenA,
           tokens.tokenB,
-          key
+          dex
         );
         const tokenAAmount =
           parseInt(await getTokenAmount(tokens.tokenA, pairAddress)) /
-          10 ** parseInt(await getDecimals(tokens.tokenA, key));
+          10 ** parseInt(await getDecimals(tokens.tokenA));
 
         const tokenBAmount =
           parseInt(await getTokenAmount(tokens.tokenB, pairAddress)) /
-          10 ** parseInt(await getDecimals(tokens.tokenB, key));
+          10 ** parseInt(await getDecimals(tokens.tokenB));
 
-        return { type: key, pairAddress, tokenAAmount, tokenBAmount };
+        return { type: dex, pairAddress, tokenAAmount, tokenBAmount };
       });
 
       const results = await Promise.all(promises);

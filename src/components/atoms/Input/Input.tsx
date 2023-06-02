@@ -4,18 +4,25 @@ import copy from "clipboard-copy";
 import { InputProps } from "@/types/interfaces";
 import { toast } from "react-toastify";
 
-const Input: React.FC<InputProps> = (props) => {
-  const { name, value, onChange, className, ...otherProps } = props;
+const Input: React.FC<InputProps> = ({
+  name,
+  value,
+  onChange,
+  className,
+  ...otherProps
+}) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const base =
+  const baseClassName =
     "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 truncate pr-8";
-  const _className = className ? `${base} ${className}` : base;
+  const mergedClassName = className
+    ? `${baseClassName} ${className}`
+    : baseClassName;
 
   const copyToClipboard = () => {
     if (inputRef.current) {
       copy(inputRef.current.value);
-      toast("Token Address is Copied");
+      toast("Token Address has been copied");
     }
   };
 
@@ -31,7 +38,7 @@ const Input: React.FC<InputProps> = (props) => {
           ref={inputRef}
           type="text"
           id={otherProps.id}
-          className={_className}
+          className={mergedClassName}
           value={value}
           onChange={onChange}
           name={name}
